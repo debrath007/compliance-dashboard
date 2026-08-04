@@ -33,6 +33,9 @@ class PreferenceBase(BaseModel):
     comm_channel: CommChannel = "email"
     zip_code: Optional[str] = None
     display_name: str = Field("", max_length=MAX_DISPLAY_NAME)
+    # New, newly-optional field on the preferences contract: lets a customer
+    # record which language they want correspondence in.
+    preferred_language: Optional[str] = None
 
     @field_validator("zip_code", mode="before")
     @classmethod
@@ -49,6 +52,7 @@ class PreferenceUpdate(BaseModel):
     comm_channel: Optional[CommChannel] = None
     zip_code: Optional[str] = None
     display_name: Optional[str] = Field(None, max_length=MAX_DISPLAY_NAME)
+    preferred_language: Optional[str] = None
 
     @field_validator("zip_code", mode="before")
     @classmethod
